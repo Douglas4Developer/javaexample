@@ -23,7 +23,10 @@ public class TarefaController {
     @Autowired
     private ProjetoService projetoService;
 
-    private Projeto projetoSelecionado;
+    private Projeto projetoSelecionado;  //para tratar os projetos selecionados
+
+
+    private Tarefa tarefaSelecionada;//para tratar as tarefas  selecionados
 
     public List<Tarefa> getTarefas() {
         return tarefaService.getTarefas();
@@ -35,6 +38,13 @@ public class TarefaController {
         } else {
             return null;
         }
+    }
+    public Tarefa getTarefaSelecionada() {
+        return tarefaSelecionada;
+    }
+
+    public void setTarefaSelecionada(Tarefa tarefaSelecionada) {
+        this.tarefaSelecionada = tarefaSelecionada;
     }
 
     public Projeto getProjetoSelecionado() {
@@ -86,5 +96,25 @@ public class TarefaController {
     public String visualizarTarefas(Projeto projeto) {
         this.projetoSelecionado = projeto;
         return "listarTarefas?faces-redirect=true";
+    }
+
+    // Métodos adicionados para edição, exclusão e nova tarefa
+
+    public String editarTarefa(Tarefa tarefa) {
+        this.tarefaSelecionada = tarefa;
+        return "editarTarefa?faces-redirect=true";
+    }
+
+    public String excluirTarefa(Tarefa tarefa) {
+        tarefaService.deleteTarefa(tarefa.getId());
+        return "listarTarefas?faces-redirect=true";
+    }
+
+    public String novaTarefa() {
+        this.tarefaSelecionada = new Tarefa();
+        if (projetoSelecionado != null) {
+            this.tarefaSelecionada.setProjeto(projetoSelecionado);
+        }
+        return "cadastroTarefa?faces-redirect=true";
     }
 }
