@@ -20,6 +20,8 @@ public class ProjetoController {
     @Autowired
     private ProjetoService projetoService;
 
+    private Projeto projetoSelecionado;
+
     // Método que retorna a lista de projetos para uso no JSF
     public List<Projeto> getProjetos() {
         return projetoService.getProjetos();
@@ -28,6 +30,12 @@ public class ProjetoController {
     // Método que é chamado ao clicar no botão "Entrar" na página bemVindo.xhtml
     public String listarProjetos() {
         return "listarProjetos?faces-redirect=true";
+    }
+
+    // Método para iniciar o cadastro de um novo projeto
+    public String novoProjeto() {
+        projetoSelecionado = new Projeto();
+        return "cadastroProjeto?faces-redirect=true";
     }
 
     @RequestMapping("/projeto/list")
@@ -61,5 +69,13 @@ public class ProjetoController {
     public String deleteProjeto(@RequestParam("projetoId") int id) {
         projetoService.deleteProjeto(id);
         return "redirect:/projeto/list";
+    }
+
+    public Projeto getProjetoSelecionado() {
+        return projetoSelecionado;
+    }
+
+    public void setProjetoSelecionado(Projeto projetoSelecionado) {
+        this.projetoSelecionado = projetoSelecionado;
     }
 }

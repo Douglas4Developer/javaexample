@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
     <title><ui:insert name="title">Default Title</ui:insert></title>
     <h:outputStylesheet name="css/style.css" />
     <h:outputScript name="js/jquery-1.11.1.min.js" />
     <h:outputScript name="js/bootstrap.min.js" />
+    <rich:jQuery src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"/>
+    <rich:jQuery src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui/1.12.1/jquery-ui.min.js"/>
 </h:head>
 <h:body>
     <div class="navbar">
