@@ -12,10 +12,10 @@
 
     <ui:define name="content">
         <h:form>
-            <h:messages globalOnly="true" layout="table" />
+            <h:messages globalOnly="true" layout="table" styleClass="message" />
             <h2>Editar Projeto</h2>
             <rich:panel>
-                <h:panelGrid columns="2" styleClass="form-grid">
+                <h:panelGrid columns="2" styleClass="form-grid" columnClasses="label,value">
                     <h:outputLabel for="titulo" value="Título:" />
                     <h:inputText id="titulo" value="#{projetoController.projetoSelecionado.titulo}" required="true" />
 
@@ -23,10 +23,15 @@
                     <h:inputText id="descricao" value="#{projetoController.projetoSelecionado.descricao}" required="true" />
 
                     <h:outputLabel for="dataInicio" value="Data de Início:" />
-                    <input type="date" id="dataInicio" value="#{projetoController.projetoSelecionado.dataInicio}" required="true" />
+                    <h:inputText id="dataInicio" value="#{projetoController.projetoSelecionado.dataInicio}" required="true" placeholder="dd/MM/yyyy">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="Ex.: DD/MM/YYYY" />
                 </h:panelGrid>
-                <h:commandButton value="Salvar" action="#{projetoController.saveProjeto}" />
-                <h:commandButton value="Cancelar" action="#{projetoController.cancelarEdicao}" immediate="true" />
+                <div class="button-group">
+                    <h:commandButton value="Salvar" action="#{projetoController.saveProjeto}" />
+                    <h:commandButton value="Cancelar" action="#{projetoController.cancelarEdicao}" immediate="true" />
+                </div>
             </rich:panel>
         </h:form>
     </ui:define>

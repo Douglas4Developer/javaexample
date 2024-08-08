@@ -1,5 +1,8 @@
 package com.doug.javaexample.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,9 +46,15 @@ public class ProjetoController {
 
     // Método para salvar o projeto
     public String saveProjeto() {
-        projetoService.saveProjeto(projetoSelecionado);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Projeto salvo com sucesso!"));
-        return "listarProjetos?faces-redirect=true";
+        try {
+            projetoSelecionado.setDataInicio(formatarData(projetoSelecionado.getDataInicio()));
+            projetoService.saveProjeto(projetoSelecionado);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Projeto salvo com sucesso!"));
+            return "listarProjetos?faces-redirect=true";
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Erro ao salvar o projeto."));
+            return null;
+        }
     }
 
     // Método para iniciar a edição de um projeto
@@ -86,4 +95,18 @@ public class ProjetoController {
     public String cancelarEdicao() {
         return "listarProjetos?faces-redirect=true";
     }
+
+    // Método para formatar a data
+
+    private Date formatarData(Date data) {
+        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            return outputFormat.parse(outputFormat.format(data));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return data;
+        }
+    }
+
+
 }
