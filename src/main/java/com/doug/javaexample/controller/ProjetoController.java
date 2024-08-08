@@ -45,9 +45,9 @@ public class ProjetoController {
     }
 
     // Método para salvar o projeto
+
     public String saveProjeto() {
         try {
-            projetoSelecionado.setDataInicio(formatarData(projetoSelecionado.getDataInicio()));
             projetoService.saveProjeto(projetoSelecionado);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Projeto salvo com sucesso!"));
             return "listarProjetos?faces-redirect=true";
@@ -56,6 +56,7 @@ public class ProjetoController {
             return null;
         }
     }
+
 
     // Método para iniciar a edição de um projeto
     public String editarProjeto(Projeto projeto) {
@@ -95,18 +96,4 @@ public class ProjetoController {
     public String cancelarEdicao() {
         return "listarProjetos?faces-redirect=true";
     }
-
-    // Método para formatar a data
-
-    private Date formatarData(Date data) {
-        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            return outputFormat.parse(outputFormat.format(data));
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return data;
-        }
-    }
-
-
 }

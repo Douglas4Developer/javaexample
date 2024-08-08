@@ -84,4 +84,5 @@
         <converter-id>dateConverter</converter-id>
         <converter-class>com.doug.javaexample.utils.DateConverter</converter-class>
     </converter>
+
 </faces-config>

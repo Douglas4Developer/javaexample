@@ -2,26 +2,27 @@ package com.doug.javaexample.utils;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.convert.DateTimeConverter;
+import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @FacesConverter("dateConverter")
-public class DateConverter extends DateTimeConverter {
+public class DateConverter implements Converter {
 
-    public DateConverter() {
-        setPattern("yyyy-MM-dd");
-    }
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
+        if (value == null || value.isEmpty()) {
+            return null;
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            Date date = sdf.parse(value);
-            return date;
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Invalid date format. Please use 'dd/MM/yyyy'.");
+            return formatter.parse(value);
+        } catch (ParseException e) {
+            throw new RuntimeException("Data inválida. Formato correto: " + DATE_FORMAT);
         }
     }
 
@@ -30,8 +31,7 @@ public class DateConverter extends DateTimeConverter {
         if (value == null) {
             return "";
         }
-        Date date = (Date) value;
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        return sdf.format(date);
+        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
+        return formatter.format((Date) value);
     }
 }
