@@ -4,13 +4,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.annotation.SessionScope;
+import javax.faces.bean.ManagedBean;
+
 import com.doug.javaexample.entity.Tarefa;
 import com.doug.javaexample.entity.Projeto;
 import com.doug.javaexample.service.TarefaService;
 import com.doug.javaexample.service.ProjetoService;
-import org.springframework.web.context.annotation.SessionScope;
-import javax.faces.bean.ManagedBean;
 
 @Controller
 @ManagedBean
@@ -23,10 +27,9 @@ public class TarefaController {
     @Autowired
     private ProjetoService projetoService;
 
-    private Projeto projetoSelecionado;  //para tratar os projetos selecionados
+    private Projeto projetoSelecionado;
 
-
-    private Tarefa tarefaSelecionada;//para tratar as tarefas  selecionados
+    private Tarefa tarefaSelecionada;
 
     public List<Tarefa> getTarefas() {
         return tarefaService.getTarefas();
@@ -39,6 +42,15 @@ public class TarefaController {
             return null;
         }
     }
+
+    public Projeto getProjetoSelecionado() {
+        return projetoSelecionado;
+    }
+
+    public void setProjetoSelecionado(Projeto projetoSelecionado) {
+        this.projetoSelecionado = projetoSelecionado;
+    }
+
     public Tarefa getTarefaSelecionada() {
         return tarefaSelecionada;
     }
@@ -47,12 +59,16 @@ public class TarefaController {
         this.tarefaSelecionada = tarefaSelecionada;
     }
 
-    public Projeto getProjetoSelecionado() {
-        return projetoSelecionado;
+    // Método para iniciar a visualização das tarefas de um projeto
+    public String visualizarTarefas(Projeto projeto) {
+        this.projetoSelecionado = projeto;
+        return "listarTarefas?faces-redirect=true";
     }
 
-    public void setProjetoSelecionado(Projeto projetoSelecionado) {
-        this.projetoSelecionado = projetoSelecionado;
+    // Método para salvar a tarefa
+    public String saveTarefa() {
+        tarefaService.saveTarefa(tarefaSelecionada);
+        return "listarTarefas?faces-redirect=true";
     }
 
     @GetMapping("/list")
@@ -72,7 +88,7 @@ public class TarefaController {
     }
 
     @PostMapping("/saveTarefa")
-    public String saveTarefa(@ModelAttribute("tarefa") Tarefa tarefa) {
+    public String saveTarefaForm(@ModelAttribute("tarefa") Tarefa tarefa) {
         tarefaService.saveTarefa(tarefa);
         return "redirect:/tarefa/list";
     }
@@ -92,29 +108,20 @@ public class TarefaController {
         return "redirect:/tarefa/list";
     }
 
-    // Método para iniciar a visualização das tarefas de um projeto
-    public String visualizarTarefas(Projeto projeto) {
-        this.projetoSelecionado = projeto;
-        return "listarTarefas?faces-redirect=true";
-    }
-
-    // Métodos adicionados para edição, exclusão e nova tarefa
-
+    // Método para iniciar a edição de uma tarefa
     public String editarTarefa(Tarefa tarefa) {
         this.tarefaSelecionada = tarefa;
         return "editarTarefa?faces-redirect=true";
     }
 
-    public String excluirTarefa(Tarefa tarefa) {
-        tarefaService.deleteTarefa(tarefa.getId());
+    // Método para cancelar a edição de uma tarefa
+    public String cancelarEdicao() {
         return "listarTarefas?faces-redirect=true";
     }
 
+    // Método para adicionar uma nova tarefa
     public String novaTarefa() {
         this.tarefaSelecionada = new Tarefa();
-        if (projetoSelecionado != null) {
-            this.tarefaSelecionada.setProjeto(projetoSelecionado);
-        }
         return "cadastroTarefa?faces-redirect=true";
     }
 }

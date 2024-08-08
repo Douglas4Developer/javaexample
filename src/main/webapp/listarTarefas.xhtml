@@ -38,7 +38,7 @@
                     <h:commandLink value="Editar" action="#{tarefaController.editarTarefa(tarefa)}">
                         <f:param name="tarefaId" value="#{tarefa.id}" />
                     </h:commandLink>
-                    <h:commandLink value="Excluir" action="#{tarefaController.excluirTarefa(tarefa)}" style="margin-left:10px;">
+                    <h:commandLink value="Excluir" action="#{tarefaController.deleteTarefa(tarefa)}" style="margin-left:10px;">
                         <f:param name="tarefaId" value="#{tarefa.id}" />
                     </h:commandLink>
                 </rich:column>
