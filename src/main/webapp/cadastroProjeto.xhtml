@@ -23,7 +23,7 @@
                     <h:inputText id="descricao" value="#{projetoController.projetoSelecionado.descricao}" required="true" />
 
                     <h:outputLabel for="dataInicio" value="Data de Início:" />
-                    <rich:calendar id="dataInicio" value="#{projetoController.projetoSelecionado.dataInicio}" datePattern="yyyy-MM-dd" required="true" />
+                    <input type="date" id="dataInicio" value="#{projetoController.projetoSelecionado.dataInicio}" required="true" />
                 </h:panelGrid>
                 <h:commandButton value="Salvar" action="#{projetoController.saveProjeto}" />
                 <h:commandButton value="Cancelar" action="#{projetoController.cancelarEdicao}" immediate="true" />

@@ -14,17 +14,6 @@
         <param-value>/resources/faces-config.xml</param-value>
     </context-param>
 
-    <context-param>
-        <param-name>org.richfaces.enableControlSkinning</param-name>
-        <param-value>true</param-value>
-    </context-param>
-
-    <context-param>
-        <param-name>org.richfaces.enableControlSkinningClasses</param-name>
-        <param-value>false</param-value>
-    </context-param>
-
-
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>

@@ -52,10 +52,10 @@ public class ProjetoController {
         return "cadastroProjeto";
     }
 
-    @RequestMapping(value = "/projeto/saveProjeto", method = RequestMethod.POST)
-    public String saveProjeto(@ModelAttribute("projeto") Projeto projeto) {
-        projetoService.saveProjeto(projeto);
-        return "redirect:/projeto/list";
+    // Método para salvar o projeto
+    public String saveProjeto() {
+        projetoService.saveProjeto(projetoSelecionado);
+        return "listarProjetos?faces-redirect=true";
     }
 
     @RequestMapping("/projeto/updateForm")
