@@ -5,11 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import com.doug.javaexample.entity.Projeto;
 import com.doug.javaexample.service.ProjetoService;
 import org.springframework.web.context.annotation.SessionScope;
-
 import javax.faces.bean.ManagedBean;
 
 @Controller
@@ -38,37 +36,28 @@ public class ProjetoController {
         return "cadastroProjeto?faces-redirect=true";
     }
 
-    @RequestMapping("/projeto/list")
-    public String listProjetos(Model model) {
-        List<Projeto> projetos = projetoService.getProjetos();
-        model.addAttribute("projetos", projetos);
-        return "listarProjetos";
-    }
-
-    @RequestMapping("/projeto/showForm")
-    public String showFormForAdd(Model model) {
-        Projeto projeto = new Projeto();
-        model.addAttribute("projeto", projeto);
-        return "cadastroProjeto";
-    }
-
     // Método para salvar o projeto
     public String saveProjeto() {
         projetoService.saveProjeto(projetoSelecionado);
         return "listarProjetos?faces-redirect=true";
     }
 
-    @RequestMapping("/projeto/updateForm")
-    public String showFormForUpdate(@RequestParam("projetoId") int id, Model model) {
-        Projeto projeto = projetoService.getProjeto(id);
-        model.addAttribute("projeto", projeto);
-        return "editarProjeto";
+    // Método para iniciar a edição de um projeto
+    public String editarProjeto(Projeto projeto) {
+        this.projetoSelecionado = projeto;
+        return "editarProjeto?faces-redirect=true";
     }
 
-    @RequestMapping("/projeto/delete")
-    public String deleteProjeto(@RequestParam("projetoId") int id) {
-        projetoService.deleteProjeto(id);
-        return "redirect:/projeto/list";
+    // Método para excluir um projeto
+    public String excluirProjeto(Projeto projeto) {
+        projetoService.deleteProjeto(projeto.getId());
+        return "listarProjetos?faces-redirect=true";
+    }
+
+    // Método para visualizar tarefas de um projeto (opcional, ajuste conforme necessário)
+    public String visualizarTarefas(Projeto projeto) {
+        this.projetoSelecionado = projeto;
+        return "listarTarefas?faces-redirect=true";
     }
 
     public Projeto getProjetoSelecionado() {

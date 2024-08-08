@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
@@ -7,7 +6,6 @@
     <application>
         <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
     </application>
-
 
     <navigation-rule>
         <from-view-id>/bemVindo.xhtml</from-view-id>
@@ -30,7 +28,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>visualizarTarefas</from-outcome>
-            <to-view-id>/visualizarTarefas.xhtml</to-view-id>
+            <to-view-id>/listarTarefas.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
@@ -81,5 +79,4 @@
             <to-view-id>/listarTarefas.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-
 </faces-config>
