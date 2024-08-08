@@ -61,4 +61,5 @@ public class TarefaDAOImpl implements TarefaDAO {
         cq.select(root).where(cb.equal(root.get("projeto"), projetoId));
         return session.createQuery(cq).getResultList();
     }
+
 }

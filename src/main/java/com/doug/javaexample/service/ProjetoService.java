@@ -14,4 +14,6 @@ public interface ProjetoService {
     void deleteProjeto(int id);
 
     void updateProjeto(Projeto projeto);
+
+    boolean hasTarefas(int projetoId);
 }

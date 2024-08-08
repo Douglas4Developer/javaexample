@@ -15,4 +15,6 @@ public interface TarefaDAO {
     void updateTarefa(Tarefa tarefa);
 
     List<Tarefa> getTarefasPorProjeto(int projetoId);
+
+
 }

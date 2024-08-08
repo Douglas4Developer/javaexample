@@ -4,7 +4,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.context.annotation.SessionScope;
+
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 import com.doug.javaexample.entity.Projeto;
 import com.doug.javaexample.service.ProjetoService;
@@ -41,6 +44,7 @@ public class ProjetoController {
     // Método para salvar o projeto
     public String saveProjeto() {
         projetoService.saveProjeto(projetoSelecionado);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Projeto salvo com sucesso!"));
         return "listarProjetos?faces-redirect=true";
     }
 
@@ -52,9 +56,16 @@ public class ProjetoController {
 
     // Método para excluir um projeto
     public String excluirProjeto(Projeto projeto) {
-        projetoService.deleteProjeto(projeto.getId());
-        return "listarProjetos?faces-redirect=true";
+        if (projetoService.hasTarefas(projeto.getId())) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso", "Não é possível excluir o projeto, pois existem tarefas associadas."));
+            return null;
+        } else {
+            projetoService.deleteProjeto(projeto.getId());
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Projeto excluído com sucesso!"));
+            return "listarProjetos?faces-redirect=true";
+        }
     }
+
 
     // Método para visualizar tarefas de um projeto
     public String visualizarTarefas(Projeto projeto) {
@@ -69,5 +80,10 @@ public class ProjetoController {
 
     public void setProjetoSelecionado(Projeto projetoSelecionado) {
         this.projetoSelecionado = projetoSelecionado;
+    }
+
+    // Método para cancelar a edição de um projeto
+    public String cancelarEdicao() {
+        return "listarProjetos?faces-redirect=true";
     }
 }

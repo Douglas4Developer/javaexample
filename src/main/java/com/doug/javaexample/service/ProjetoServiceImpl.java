@@ -1,6 +1,8 @@
 package com.doug.javaexample.service;
 
 import java.util.List;
+
+import com.doug.javaexample.dao.TarefaDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +14,9 @@ public class ProjetoServiceImpl implements ProjetoService {
 
     @Autowired
     private ProjetoDAO projetoDAO;
+
+    @Autowired
+    private TarefaDAO tarefaDAO;
 
     @Override
     @Transactional
@@ -41,6 +46,12 @@ public class ProjetoServiceImpl implements ProjetoService {
     @Transactional
     public void updateProjeto(Projeto projeto) {
         projetoDAO.updateProjeto(projeto);
+    }
+
+    @Override
+    @Transactional
+    public boolean hasTarefas(int projetoId) {
+        return !tarefaDAO.getTarefasPorProjeto(projetoId).isEmpty();
     }
 
 }

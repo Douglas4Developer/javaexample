@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.annotation.SessionScope;
+
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 import com.doug.javaexample.entity.Tarefa;
 import com.doug.javaexample.entity.Projeto;
@@ -67,9 +70,14 @@ public class TarefaController {
 
     // Método para salvar a tarefa
     public String saveTarefa() {
+        if (projetoSelecionado != null) {
+            tarefaSelecionada.setProjeto(projetoSelecionado);
+        }
         tarefaService.saveTarefa(tarefaSelecionada);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Tarefa salva com sucesso!"));
         return "listarTarefas?faces-redirect=true";
     }
+
 
     @GetMapping("/list")
     public String listTarefas(Model model) {
@@ -102,12 +110,6 @@ public class TarefaController {
         return "editarTarefa";
     }
 
-    @GetMapping("/delete")
-    public String deleteTarefa(@RequestParam("tarefaId") int id) {
-        tarefaService.deleteTarefa(id);
-        return "redirect:/tarefa/list";
-    }
-
     // Método para iniciar a edição de uma tarefa
     public String editarTarefa(Tarefa tarefa) {
         this.tarefaSelecionada = tarefa;
@@ -123,5 +125,12 @@ public class TarefaController {
     public String novaTarefa() {
         this.tarefaSelecionada = new Tarefa();
         return "cadastroTarefa?faces-redirect=true";
+    }
+
+    // Método para excluir uma tarefa
+    public String deleteTarefa(Tarefa tarefa) {
+        tarefaService.deleteTarefa(tarefa.getId());
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Tarefa excluída com sucesso!"));
+        return "listarTarefas?faces-redirect=true";
     }
 }
