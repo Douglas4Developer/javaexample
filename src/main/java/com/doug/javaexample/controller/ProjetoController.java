@@ -3,12 +3,11 @@ package com.doug.javaexample.controller;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import com.doug.javaexample.entity.Projeto;
-import com.doug.javaexample.service.ProjetoService;
 import org.springframework.web.context.annotation.SessionScope;
 import javax.faces.bean.ManagedBean;
+
+import com.doug.javaexample.entity.Projeto;
+import com.doug.javaexample.service.ProjetoService;
 
 @Controller
 @ManagedBean
@@ -17,6 +16,9 @@ public class ProjetoController {
 
     @Autowired
     private ProjetoService projetoService;
+
+    @Autowired
+    private TarefaController tarefaController; // Injetando o TarefaController
 
     private Projeto projetoSelecionado;
 
@@ -54,9 +56,10 @@ public class ProjetoController {
         return "listarProjetos?faces-redirect=true";
     }
 
-    // Método para visualizar tarefas de um projeto (opcional, ajuste conforme necessário)
+    // Método para visualizar tarefas de um projeto
     public String visualizarTarefas(Projeto projeto) {
         this.projetoSelecionado = projeto;
+        tarefaController.setProjetoSelecionado(projeto); // Define o projeto selecionado no TarefaController
         return "listarTarefas?faces-redirect=true";
     }
 

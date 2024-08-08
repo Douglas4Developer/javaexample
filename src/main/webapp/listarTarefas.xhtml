@@ -11,8 +11,8 @@
 
     <ui:define name="content">
         <h:form>
-            <h2>Tarefas do Projeto: #{projetoController.projetoSelecionado.titulo}</h2>
-            <rich:dataTable value="#{tarefaController.getTarefasPorProjeto}" var="tarefa">
+            <h2>Tarefas do Projeto: #{tarefaController.projetoSelecionado.titulo}</h2>
+            <rich:dataTable value="#{tarefaController.tarefasPorProjeto}" var="tarefa">
                 <rich:column>
                     <f:facet name="header">ID</f:facet>
                     #{tarefa.id}

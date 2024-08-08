@@ -4,19 +4,21 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.annotation.SessionScope;
+import javax.faces.bean.ManagedBean;
 
 import com.doug.javaexample.entity.Tarefa;
 import com.doug.javaexample.entity.Projeto;
 import com.doug.javaexample.service.TarefaService;
 import com.doug.javaexample.service.ProjetoService;
-import org.springframework.web.context.annotation.SessionScope;
-
-
 
 @Controller
+@ManagedBean
 @SessionScope
-@RequestMapping("/tarefa")
 public class TarefaController {
 
     @Autowired
@@ -25,8 +27,32 @@ public class TarefaController {
     @Autowired
     private ProjetoService projetoService;
 
+    private Projeto projetoSelecionado;
+
     public List<Tarefa> getTarefas() {
         return tarefaService.getTarefas();
+    }
+
+    public List<Tarefa> getTarefasPorProjeto() {
+        if (projetoSelecionado != null) {
+            return tarefaService.getTarefasPorProjeto(projetoSelecionado.getId());
+        } else {
+            return null;
+        }
+    }
+
+    public Projeto getProjetoSelecionado() {
+        return projetoSelecionado;
+    }
+
+    public void setProjetoSelecionado(Projeto projetoSelecionado) {
+        this.projetoSelecionado = projetoSelecionado;
+    }
+
+    // Método para iniciar a visualização das tarefas de um projeto
+    public String visualizarTarefas(Projeto projeto) {
+        this.projetoSelecionado = projeto;
+        return "listarTarefas?faces-redirect=true";
     }
 
     @GetMapping("/list")
