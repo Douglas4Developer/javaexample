@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/780ef59a-a5eb-4f04-b5e7-4dc5c458c16b)# Sistema de Projetos e Tarefas
+# Sistema de Projetos e Tarefas
 
 ## JAVA WEB 
 
