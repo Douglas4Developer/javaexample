@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+    <ui:define name="title">
+        Bem-vindo ao Sistema de Gerenciamento de Projetos e Tarefas
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="welcome-container">
+            <h2>Bem-vindo ao Sistema de Gerenciamento de Projetos e Tarefas</h2>
+            <h:form>
+                <a4j:commandButton value="Entrar" action="#{projetoController.listarProjetos}" styleClass="btn-enter" render=":listarProjetos" />
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+</html>

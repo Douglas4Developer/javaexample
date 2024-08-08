@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+    <ui:define name="title">
+        Editar Projeto
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <h:messages globalOnly="true" layout="table" />
+            <h2>Editar Projeto</h2>
+            <rich:panel>
+                <h:panelGrid columns="2" styleClass="form-grid">
+                    <h:outputLabel for="titulo" value="Título:" />
+                    <h:inputText id="titulo" value="#{projetoController.projetoSelecionado.titulo}" required="true" />
+
+                    <h:outputLabel for="descricao" value="Descrição:" />
+                    <h:inputText id="descricao" value="#{projetoController.projetoSelecionado.descricao}" required="true" />
+
+                    <h:outputLabel for="dataInicio" value="Data de Início:" />
+                    <h:inputText id="dataInicio" value="#{projetoController.projetoSelecionado.dataInicio}">
+                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                    </h:inputText>
+                </h:panelGrid>
+                <h:commandButton value="Salvar" action="#{projetoController.saveProjeto}" />
+                <h:commandButton value="Cancelar" action="#{projetoController.cancelarEdicao}" immediate="true" />
+            </rich:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

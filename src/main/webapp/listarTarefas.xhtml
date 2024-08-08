@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+    <ui:define name="title">
+        Tarefas do Projeto
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <h2>Tarefas do Projeto: #{projetoController.projetoSelecionado.titulo}</h2>
+            <rich:dataTable value="#{tarefaController.getTarefasPorProjeto}" var="tarefa">
+                <rich:column>
+                    <f:facet name="header">ID</f:facet>
+                    #{tarefa.id}
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Título</f:facet>
+                    #{tarefa.titulo}
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Descrição</f:facet>
+                    #{tarefa.descricao}
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Prioridade</f:facet>
+                    #{tarefa.prioridade}
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Estimativa de Horas</f:facet>
+                    #{tarefa.estimativaHoras}
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Ações</f:facet>
+                    <h:commandLink value="Editar" action="#{tarefaController.editarTarefa(tarefa)}">
+                        <f:param name="tarefaId" value="#{tarefa.id}" />
+                    </h:commandLink>
+                    <h:commandLink value="Excluir" action="#{tarefaController.excluirTarefa(tarefa)}" style="margin-left:10px;">
+                        <f:param name="tarefaId" value="#{tarefa.id}" />
+                    </h:commandLink>
+                </rich:column>
+            </rich:dataTable>
+        </h:form>
+
+        <br/>
+
+        <h:form>
+            <h:commandButton value="Adicionar Nova Tarefa" action="#{tarefaController.novaTarefa}" />
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
