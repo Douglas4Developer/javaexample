@@ -55,12 +55,12 @@ CREATE TABLE tarefa (
 
 1. Clone o repositório do GitHub:
     ```sh
-    git clone https://github.com/seu-usuario/sistema-projetos-tarefas.git
+    git clone https://github.com/seu-usuario/javaexample.git
     ```
 
 2. Navegue até o diretório do projeto:
     ```sh
-    cd sistema-projetos-tarefas
+    cd javaexample
     ```
 
 3. Compile o projeto usando Maven:
@@ -71,12 +71,12 @@ CREATE TABLE tarefa (
 ## Executando o Projeto
 
 1. Implante o arquivo WAR no Tomcat:
-    - Copie o arquivo `target/sistema-projetos-tarefas.war` para o diretório `webapps` do Tomcat.
+    - Copie o arquivo `target/javaexample.war` para o diretório `webapps` do Tomcat.
     - Inicie o Tomcat (se não estiver iniciado).
 
 2. Acesse o sistema através do navegador:
     ```sh
-    http://localhost:8080/sistema-projetos-tarefas
+    http://localhost:8080/javaexample
     ```
 
 ## Funcionalidades
