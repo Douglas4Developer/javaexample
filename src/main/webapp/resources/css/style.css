@@ -103,17 +103,18 @@ h\:commandButton:hover {
 .form-grid .label {
     text-align: right;
     padding-right: 10px;
-    font-weight: bold;
+    vertical-align: middle;
+    white-space: nowrap;
 }
 
 .form-grid .value {
-    text-align: left;
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .button-group {
-    display: flex;
-    justify-content: flex-end;
     margin-top: 20px;
+    text-align: center;
 }
 
 
@@ -121,4 +122,11 @@ input[type="date"]::before {
     content: attr(placeholder);
     color: #aaa;
     margin-right: 5px;
+}
+
+.form-grid .hint {
+    font-size: 0.9em;
+    color: #666;
+    padding-left: 10px;
+    vertical-align: middle;
 }

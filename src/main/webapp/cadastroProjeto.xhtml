@@ -15,18 +15,20 @@
             <h:messages globalOnly="true" layout="table" styleClass="message" />
             <h2>Cadastro de Novo Projeto</h2>
             <rich:panel>
-                <h:panelGrid columns="2" styleClass="form-grid" columnClasses="label,value">
+                <h:panelGrid columns="3" styleClass="form-grid" columnClasses="label,value,hint">
                     <h:outputLabel for="titulo" value="Título:" />
                     <h:inputText id="titulo" value="#{projetoController.projetoSelecionado.titulo}" required="true" />
+                    <h:outputLabel />
 
                     <h:outputLabel for="descricao" value="Descrição:" />
                     <h:inputText id="descricao" value="#{projetoController.projetoSelecionado.descricao}" required="true" />
+                    <h:outputLabel />
 
                     <h:outputLabel for="dataInicio" value="Data de Início:" />
-                    <h:outputLabel value="Ex.: DD/MM/YYYY" />
                     <h:inputText id="dataInicio" value="#{projetoController.projetoSelecionado.dataInicio}" required="true" placeholder="dd/MM/yyyy">
                         <f:converter converterId="dateConverter" />
                     </h:inputText>
+                    <h:outputLabel value="Ex.: DD/MM/YYYY" styleClass="hint" />
                 </h:panelGrid>
                 <div class="button-group">
                     <h:commandButton value="Salvar" action="#{projetoController.saveProjeto}" />
