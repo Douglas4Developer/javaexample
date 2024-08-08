@@ -1,5 +1,7 @@
 package com.doug.javaexample.entity;
+
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -12,6 +14,13 @@ public class Projeto {
 
     @Column(name = "titulo")
     private String titulo;
+
+    @Column(name = "descricao")
+    private String descricao;
+
+    @Column(name = "data_inicio")
+    @Temporal(TemporalType.DATE)
+    private Date dataInicio;
 
     @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL)
     private List<Tarefa> tarefas;
@@ -32,6 +41,22 @@ public class Projeto {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Date getDataInicio() {
+        return dataInicio;
+    }
+
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
     }
 
     public int getId() {
