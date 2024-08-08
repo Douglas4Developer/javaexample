@@ -1,8 +1,8 @@
-# Sistema de Projetos e Tarefas
+![image](https://github.com/user-attachments/assets/780ef59a-a5eb-4f04-b5e7-4dc5c458c16b)# Sistema de Projetos e Tarefas
 
 ## JAVA WEB 
 
-<img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="40" height="40"/>
+<img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="40" height="40"/> <img loading="lazy" src="https://pbs.twimg.com/profile_images/914842431748739072/66NFe2g3_400x400.jpg" width="40" height="40"/> <img loading="lazy" src="https://raw.githubusercontent.com/richfaces/docs/4.3.1.20130305-Final/Component_Reference/src/main/docbook/en-US/images/rf_logo.png" width="40" height="40"/>
 
 Este é um sistema de gerenciamento de projetos e tarefas desenvolvido utilizando Java EE, Spring Framework, Hibernate, JSF, e RichFaces. 
 O objetivo deste sistema é permitir a criação, edição e exclusão de projetos e tarefas associadas.
